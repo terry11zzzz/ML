@@ -1424,7 +1424,7 @@ Sb 越大 → 类间越分离
 
 > “LDA 通过构建类内散度矩阵 Sw 和类间散度矩阵 Sb，求解 Sb w = λ Sw w，找到能最大化类间距离、最小化类内距离的投影方向。训练过程主要包括计算均值、计算 Sw/Sb、求解广义特征值并投影，是一种监督型的线性降维方法，非常适用于像 EEG/EMG 这种高维噪声数据的分类。”
 
-![img](https://github.com/terry11zzzz/ML/blob/main/PR.png)
+![img](https://github.com/terry11zzzz/ML/blob/main/fisher.jpeg)
 
 
 - [ ] [2-1-23  Word2vec和LDA两个模型有什么区别和联系？](#2-1-23)
@@ -1500,9 +1500,11 @@ Sb 越大 → 类间越分离
 （1）根据给定的距离度量，在训练集 $T$ 中找出与 $x$ 最邻近的 $k$个点，涵盖这 $k$ 个点的邻域记作 $N_k(x)$；
 
 （2）在$N_k(x)$中根据分类决策规则（如多数表决）决定 $x$ 的类别 $y$：
+
 $$
 y=\arg \max _{c_{j}} \sum_{x_{i} \in N_{k}(x)} I\left(y_{i}=c_{j}\right), \quad i=1,2, \cdots, N_{i} \quad j=1,2, \cdots, K
 $$
+
 在上式中，$I$为指示函数，即当$y_{i}=c_{j}$时为1，否则为0
 
 
@@ -1540,10 +1542,14 @@ $$
 
 - [ ] [2-2-4  常用的距离衡量公式都有哪些？具体说明它们的计算流程，以及使用场景？](#2-2-4)
 
-  特征空间 $\mathcal X$ 是n维实数向量空间 $\mathbf{R}^n$ ，$x_i,x_j\in \mathcal{X}, x_i = (x_i^{(1)}, x_i^{(2)},\cdots x_i^{(n)}  ),  x_j = (x_j^{(1)}, x_j^{(2)}, \cdots, x_j^{(n)})$  。则 $x_i,x_j$的 $L_p$距离（闵可夫斯基距离）定义为
+  特征空间 $\mathcal X$ 是n维实数向量空间
+ $\mathbf{R}^n$ ，$x_i,x_j\in \mathcal{X}, x_i = (x_i^{(1)}, x_i^{(2)},\cdots x_i^{(n)}  ),  x_j = (x_j^{(1)}, x_j^{(2)}, \cdots, x_j^{(n)})$
+则 $x_i,x_j$的 $L_p$距离（闵可夫斯基距离）定义为
+
 $$
   L_p(x_i, x_j) = (\sum_{l=1}^n |x_i^{(l)}-x_j^{(l)}|)^{\frac{1}{p}}
 $$
+
   这里 $p \geq 1 $。
 
   1.**欧式距离**
@@ -1551,23 +1557,31 @@ $$
   当 $p=2$时，称为欧氏距离，强调数值上的绝对误差
 
   是严格定义的距离，满足正定性、对称性、三角不等式
+  
 $$
   L_2(x_i, x_j) = (\sum_{l=1}^n |x_i^{(l)}-x_j^{(l)}|)^{\frac{1}{p}}
 $$
+
   2.**曼哈顿距离**（p=1）
+  
 $$
   L_1(x_i, x_j) = \sum_{l=1}^n |x_i^{(l)}-x_j^{(l)}|
 $$
+
   3.**切比雪夫距离**（$p = \infty$），各个坐标距离数值差的绝对值的最大值
+  
 $$
   L_{\infty}(x_i, x_j) = \mathop{\max}_{l} \  |x_i^{(l)}-x_j^{(l)}|
 $$
+
   4.**马氏距离**
 
 考虑各个分量（特征）之间的相关性并与各个分量的尺度无关。给定一个样本集合$X$，$X=(x_{ij})_{m\times n}$，其协方差矩阵记为$S$。样本$x_i$与样本$x_j$之间的马氏距离$d_{ij}$定义为
+
 $$
 d_{ij} = [(x_i - x_j)^TS^{-1}(x_i - x_j)]^{\frac{1}{2}}
 $$
+
   当$S$为单位矩阵时，即样本数据的各个分量互相独立且各个分量的方差为1时，马氏距离就是欧氏距离。
 
 
@@ -1588,10 +1602,12 @@ $$
 相关系数的绝对值越接近1，表示样本越相似；越接近0，表示样本越不相似。
 
 $x_i$与$x_j$之间的相关系数定义为
+
 $$
 r_{ij} = 
 \frac{\sum_{k=1}^{m}\left(x_{k i}-\overline{x}_{i}\right)\left(x_{k j}-\overline{x}_{j}\right)}{\left[\sum_{k=1}^{m}\left(x_{k i}-\overline{x}_{i}\right)^{2} \sum_{k=1}^{m}\left(x_{k j}-\overline{x}_{j}\right)^{2}\right]^{\frac{1}{2}}}
 $$
+
 
 $$
 \overline{x}_{i}=\frac{1}{m} \sum_{k=1}^{m} x_{k i}, \quad \overline{x}_{j}=\frac{1}{m} \sum_{k=1}^{m} x_{k j}
@@ -1602,9 +1618,11 @@ $$
   强调方向上的相对误差
 
   不是严格定义的距离，满足正定性、对称性，不满足三角不等式
+  
 $$
   cos(A,B) = \frac{A \cdot B}{||A||_2 ||B||_2}
 $$
+
   5.**KL散度**
 
   计算两个分布的差异性
@@ -1643,7 +1661,9 @@ K=N，则完全不足取，因为此时无论输入实例是什么，都只是�
   
   **构造平衡kd树过程：**
   
-  输入：k维空间数据集 $T=\left\{x_{1}, x_{2}, \cdots, x_{N}\right\}$，其中$x_{i}=\left(x_{i}^{(1)}, x_{i}^{(2)}, \cdots, x_{i}^{(k)}\right)^{\mathrm{T}}, \quad i=1,2, \cdots, N_{\mathrm{i}}$
+  输入：k维空间数据集
+$T=\left\{x_{1}, x_{2}, \cdots, x_{N}\right\}$，其中$x_{i}=\left(x_{i}^{(1)}, x_{i}^{(2)}, \cdots, x_{i}^{(k)}\right)^{\mathrm{T}}, \quad i=1,2, \cdots, N_{\mathrm{i}}$
+
   
   输出：kd树
   
