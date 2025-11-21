@@ -1940,7 +1940,7 @@ $$
 - [ ] [2-4-3  后验概率最大化的含义是什么？](#2-4-3)
 
   朴素贝叶斯法将实例分到后验概率最大的类中。后验概率最大化这等价于期望风险最小化。
-
+![img](https://github.com/terry11zzzz/ML/blob/main/image.png)
   假设选择0-1损失函数：
   
 $$
@@ -1989,7 +1989,6 @@ f(x)=\arg \max _{c_{k}} P\left(c_{k} | X=x\right)
 $$
   
   即朴素贝叶斯法所采用原理
-![img](https://github.com/terry11zzzz/ML/blob/main/bayes.jpeg)
   
 
 - [ ] [2-4-4  朴素贝叶斯模型如何学习的？训练过程是怎样？](#2-4-4)
