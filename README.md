@@ -1944,31 +1944,52 @@ $$
   假设选择0-1损失函数：
   
 $$
-L(Y, f(X))=\left\{\begin{array}{ll}{1,} & {Y \neq f(X)} \\ {0,} & {Y=f(X)}\end{array}\right.
+L(Y, f(X)) =
+\begin{cases}
+1, & Y \neq f(X),\\
+0, & Y = f(X).
+\end{cases}
 $$
+
   
   其中 $f(X)$是分类决策函数。这是期望风险函数为
  
 $$
-R_{\operatorname{cap}}(f)=E[L(Y, f(X))]
+R_{\{cap}}(f)=E[L(Y, f(X))]
 $$
   
   期望是对联合分布 $P(X,Y)$ 取的。由此取条件期望
   
 $$
-R_{\mathrm{exp}}(f)=E_{X} \sum_{k=1}^{K}\left[L\left(c_{k}, f(X)\right)\right] P\left(c_{k} | X\right)
+R_{exp}(f)
+= E_X [ \sum_{k=1}^K L(c_k, f(X)) P(c_k \mid X) ].
 $$
+
   
   为了使期望奉献最小化，只需对 $X=x$ 逐个最小化，由此得到
+
 $$
-\begin{aligned} f(x) &=\arg \min _{y \in \mathcal{Y}} \sum_{k=1}^{K} L\left(c_{k}, y\right) P\left(c_{k} | X=x\right) \\ &=\arg \min _{y \in \mathcal{Y}} \sum_{k=1}^{K} P\left(y \neq c_{k} | X=x\right) \\ &=\arg \min _{y \in \mathcal{Y}}\left(1-P\left(y=c_{k} | X=x\right)\right) \\ &=\arg \max _{y \in \mathcal{Y}} P\left(y=c_{k} | X=x\right) \end{aligned}
+\begin{aligned}
+f(x)
+&= \arg\min_{y \in \mathcal{Y}} 
+\sum_{k=1}^K L(c_k, y)\, P(c_k \mid X=x)
+&= \arg\min_{y \in \mathcal{Y}} 
+\sum_{k=1}^K \mathbf{1}_{\{y \ne c_k\}}\, P(c_k \mid X=x) 
+&= \arg\min_{y \in \mathcal{Y}} 
+\Big( 1 - P(y \mid X=x) \Big) 
+&= \arg\max_{y \in \mathcal{Y}} 
+P(y \mid X=x).
+\end{aligned}
 $$
+
   这样一来，根据期望风险最小化准则就得到了后延概率最大化准则：
+
 $$
 f(x)=\arg \max _{c_{k}} P\left(c_{k} | X=x\right)
 $$
+  
   即朴素贝叶斯法所采用原理
-
+![img](https://github.com/terry11zzzz/ML/blob/main/bayes.jpeg)
   
 
 - [ ] [2-4-4  朴素贝叶斯模型如何学习的？训练过程是怎样？](#2-4-4)
