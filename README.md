@@ -1914,28 +1914,28 @@ $$
 
 - [ ] [2-4-1  讲解贝叶斯定理？](2-4-1)
   
-  $$
-  P\left(B_{i} | A\right)=\frac{P\left(B_{i}\right) P\left(A | B_{i}\right)}{\sum_{j=1}^{n} P\left(B_{j}\right) P\left(A | B_{j}\right)}
-  $$
+$$
+P\left(B_{i} | A\right)=\frac{P\left(B_{i}\right) P\left(A | B_{i}\right)}{\sum_{j=1}^{n} P\left(B_{j}\right) P\left(A | B_{j}\right)}
+$$
   
 
 - [ ] [2-4-2  什么是条件概率、边缘概率、联合概率？](#2-4-2)
 
   **条件概率**：条件概率表示在条件$Y=b$成立的情况下，$X=a$的概率，记作$P(X=a|Y=b)$或$P(a|b)$。它具有如下性质： “在条件Y=b下X的条件分布”也是一种“X的概率分布”，因此穷举X的可取值之后，所有这些值对应的概率之和为1 即： 
   
-  $$
-  \sum_{a} P(X=a | Y=b)=1
-  $$
+$$
+\sum_{a} P(X=a | Y=b)=1
+$$
  
   **边缘概率**：仅与单个随机变量有关的概率称为边缘概率，如 $P(X=a)$ 或 $P(Y=b)$
 
-  **联合概率**：联合概率指的是包含多个条件且**所有条件同时成立**的概率，记作$P(X=a,Y=b)$或$P(a,b)$
+  **联合概率**：联合概率指的是包含多个条件且**所有条件同时成立**的概率，记作  $P(X=a,Y=b)$  或  $P(a,b)$  
 
   联合概率、边缘概率与条件概率的关系：
   
-  $$
-  P(X=a | Y=b)=\frac{P(X=a, Y=b)}{P(Y=b)}
-  $$
+$$
+P(X=a | Y=b)=\frac{P(X=a, Y=b)}{P(Y=b)}
+$$
   
 - [ ] [2-4-3  后验概率最大化的含义是什么？](#2-4-3)
 
@@ -1943,30 +1943,30 @@ $$
 
   假设选择0-1损失函数：
   
-  $$
-  L(Y, f(X))=\left\{\begin{array}{ll}{1,} & {Y \neq f(X)} \\ {0,} & {Y=f(X)}\end{array}\right.
-  $$
+$$
+L(Y, f(X))=\left\{\begin{array}{ll}{1,} & {Y \neq f(X)} \\ {0,} & {Y=f(X)}\end{array}\right.
+$$
   
   其中 $f(X)$是分类决策函数。这是期望风险函数为
  
-  $$
-  R_{\operatorname{cap}}(f)=E[L(Y, f(X))]
-  $$
+$$
+R_{\operatorname{cap}}(f)=E[L(Y, f(X))]
+$$
   
   期望是对联合分布 $P(X,Y)$ 取的。由此取条件期望
   
-  $$
-  R_{\mathrm{exp}}(f)=E_{X} \sum_{k=1}^{K}\left[L\left(c_{k}, f(X)\right)\right] P\left(c_{k} | X\right)
-  $$
+$$
+R_{\mathrm{exp}}(f)=E_{X} \sum_{k=1}^{K}\left[L\left(c_{k}, f(X)\right)\right] P\left(c_{k} | X\right)
+$$
   
   为了使期望奉献最小化，只需对 $X=x$ 逐个最小化，由此得到
-  $$
-  \begin{aligned} f(x) &=\arg \min _{y \in \mathcal{Y}} \sum_{k=1}^{K} L\left(c_{k}, y\right) P\left(c_{k} | X=x\right) \\ &=\arg \min _{y \in \mathcal{Y}} \sum_{k=1}^{K} P\left(y \neq c_{k} | X=x\right) \\ &=\arg \min _{y \in \mathcal{Y}}\left(1-P\left(y=c_{k} | X=x\right)\right) \\ &=\arg \max _{y \in \mathcal{Y}} P\left(y=c_{k} | X=x\right) \end{aligned}
-  $$
+$$
+\begin{aligned} f(x) &=\arg \min _{y \in \mathcal{Y}} \sum_{k=1}^{K} L\left(c_{k}, y\right) P\left(c_{k} | X=x\right) \\ &=\arg \min _{y \in \mathcal{Y}} \sum_{k=1}^{K} P\left(y \neq c_{k} | X=x\right) \\ &=\arg \min _{y \in \mathcal{Y}}\left(1-P\left(y=c_{k} | X=x\right)\right) \\ &=\arg \max _{y \in \mathcal{Y}} P\left(y=c_{k} | X=x\right) \end{aligned}
+$$
   这样一来，根据期望风险最小化准则就得到了后延概率最大化准则：
-  $$
-  f(x)=\arg \max _{c_{k}} P\left(c_{k} | X=x\right)
-  $$
+$$
+f(x)=\arg \max _{c_{k}} P\left(c_{k} | X=x\right)
+$$
   即朴素贝叶斯法所采用原理
 
   
@@ -1981,29 +1981,29 @@ $$
 
   （1）计算先验概率及条件概率
 
-  $$
-  \begin{array}{l}{P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, \quad k=1,2, \cdots, K} \\ {P\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}} \\ {j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K}\end{array}
-  $$
+$$
+\begin{array}{l}{P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, \quad k=1,2, \cdots, K} \\ {P\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}} \\ {j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K}\end{array}
+$$
   
   （2）对于给定实例  $x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}\right)^{\mathrm{T}}$  ，计算
  
-  $$
-  P\left(Y=c_{k}\right) \prod_{i=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right), \quad k=1,2, \cdots, K
-  $$
+$$
+P\left(Y=c_{k}\right) \prod_{i=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right), \quad k=1,2, \cdots, K
+$$
   
   （3）确定实例x的类（最大后验概率）
   
-  $$
-  y = \arg\max_{c_k}\ P(Y=c_k)\prod_{j}P(X^{(j)}=x^{(j)}|Y=c_k)
-  $$
+$$
+y = \arg\max_{c_k}\ P(Y=c_k)\prod_{j}P(X^{(j)}=x^{(j)}|Y=c_k)
+$$
   
 - [ ] [2-4-5  你如何理解生成模型和判别模型？](#2-4-5)
 
   **生成方法**由数据学习联合概率分布  $P(X,Y)$，然后求出条件概率分布  $P(Y|X)$  作为预测模型：
    
-  $$
-  P(Y|X) = \frac{P(X,Y)}{P(X)}
-  $$
+$$
+P(Y|X) = \frac{P(X,Y)}{P(X)}
+$$
   
   之所以成为生成方法，是因为模型表示了给定输入 $X$ 产生输出 $Y$的生成关系。
 
@@ -2019,9 +2019,9 @@ $$
 
   "朴素"体现在朴素贝叶斯模型对条件概率分布作了**条件独立性假设**，这是一个较强的假设。
   
-  $$
-  \begin{aligned} P(X&=x | Y=c_{k} )=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right) \\ &=\prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right) \end{aligned}
-  $$
+$$
+\begin{aligned} P(X&=x | Y=c_{k} )=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right) \\ &=\prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right) \end{aligned}
+$$
   
   存在问题：当特征分布不满足条件独立性假设时，分类的性能不高
 
@@ -2118,18 +2118,18 @@ $$
   分子加1，分母加可能情况数
 
   用极大似然法估计可能会出现所要估计的概率值为0的情况。这是会影响到后验概率的计算结果，使分类产生偏差。解决这一问题的方法是采用贝叶斯估计。具体地，条件概率的贝叶斯估计是
-  $$
-  P_{\lambda}\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)+\lambda}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+S_{j} \lambda}
-  $$
-  式中 $\lambda \geq 0$。等价于在随机变量各个取值的频数上赋予一个正数 $\lambda$。当$\lambda=0$时就是极大似然估计。常取 $\lambda=1$，这时称为拉普拉斯平滑（laplacian smoothing）。显然，对任何$l=1,2, \cdots, S_{j}, \quad k=1,2, \cdots, K$ 有
-  $$
-  \begin{array}{l}{P_{\lambda}\left(X^{(j)}=a_{j l} | Y=c_{k}\right)>0} \\ {\sum_{l=1}^{s_{j}} P\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=1}\end{array}
-  $$
+$$
+P_{\lambda}\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)+\lambda}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+S_{j} \lambda}
+$$
+式中 $\lambda \geq 0$。等价于在随机变量各个取值的频数上赋予一个正数 $\lambda$。当$\lambda=0$时就是极大似然估计。常取 $\lambda=1$，这时称为拉普拉斯平滑（laplacian smoothing）。显然，对任何$l=1,2, \cdots, S_{j}, \quad k=1,2, \cdots, K$ 有
+$$
+\begin{array}{l}{P_{\lambda}\left(X^{(j)}=a_{j l} | Y=c_{k}\right)>0} \\ {\sum_{l=1}^{s_{j}} P\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=1}\end{array}
+$$
 
   表明上式确实为一种概率分布。同样，先验概率的贝叶斯估计是
-  $$
-  P_{\lambda}\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+\lambda}{N+K \lambda}
-  $$
+$$
+P_{\lambda}\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+\lambda}{N+K \lambda}
+$$
 
 
 
@@ -2139,7 +2139,7 @@ $$
 
 - [ ] [2-5-2  什么是“广义线性模型”？](#2-5-2)
 
-  考虑单调可微函数 $g(\cdot)$，令  $g(y)=\overrightarrow{\mathbf{w}}^{T} \overrightarrow{\mathbf{x}}+b$，这样得到的模型称作广义线性模型 (`generalized linear model`)。其中函数 $g(\cdot)$  称作联系函数 (`link function`) 。
+  考虑单调可微函数 $g(\cdot)$，令  $g(y)=\overrightarrow{\mathbf{w}}^{T} \overrightarrow{\mathbf{x}}+b$  ，这样得到的模型称作广义线性模型 (`generalized linear model`)。其中函数 $g(\cdot)$  称作联系函数 (`link function`) 。
 
   
 
